@@ -1,0 +1,85 @@
+// Prisma schema del dominio GranaBank.
+// Dos conexiones a Supabase:
+//  - DATABASE_URL: pooler (pgbouncer, puerto 6543) usado por la app en runtime.
+//  - DIRECT_URL: conexión directa (puerto 5432) usada por `prisma migrate`.
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  // La URL (pooler) y la directUrl (migraciones) se definen en prisma.config.ts
+}
+
+// Emisor de la tarjeta. Solo soportamos los dos que aparecen en el diseño.
+enum CardIssuer {
+  MASTERCARD
+  VISA
+}
+
+// Tipo de movimiento. Los valores son los tres tipos visibles en el Figma:
+//  - SUS: Débito automático / suscripción (Adobe, Figma)
+//  - CASH_IN: Pago recibido
+//  - CASH_OUT: Pago enviado
+enum MovementType {
+  SUS
+  CASH_IN
+  CASH_OUT
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  cards     Card[]
+  movements Movement[]
+
+  @@map("users")
+}
+
+model Card {
+  id        String     @id @default(cuid())
+  userId    String
+  balance   Decimal    @db.Decimal(14, 2)
+  currency  String     @default("USD") @db.VarChar(3)
+  last4     String     @db.VarChar(4)
+  holder    String
+  // Formato MM/YY para matchear el diseño; a nivel producto no necesitamos día.
+  expDate   String     @db.VarChar(5)
+  issuer    CardIssuer
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("cards")
+}
+
+model Movement {
+  id           String       @id @default(cuid())
+  userId       String
+  type         MovementType
+  // Nombre del comercio o persona (Adobe, Juan Perez, etc).
+  counterparty String
+  // Descripción corta mostrada en la UI (Pago de suscripción, Pago recibido, ...).
+  description  String
+  amount       Decimal      @db.Decimal(14, 2)
+  currency     String       @default("USD") @db.VarChar(3)
+  date         DateTime
+  createdAt    DateTime     @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Índice principal: listar movimientos del usuario por fecha descendente.
+  @@index([userId, date(sort: Desc)])
+  // Índice secundario: filtro por tipo (chips de la UI).
+  @@index([userId, type])
+  @@map("movements")
+}
