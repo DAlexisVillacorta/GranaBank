@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens extraídos del Figma.
+ * En Tailwind v4 la paleta se define con @theme y los tokens quedan
+ * disponibles como utilities (ej: bg-brand-700, text-cash-in, etc).
+ */
+@theme {
+  /* Granate: color principal de la marca. */
+  --color-brand-50: #fdf5f7;
+  --color-brand-100: #fbe5ea;
+  --color-brand-200: #f3bcc6;
+  --color-brand-300: #e58b9b;
+  --color-brand-400: #c75a71;
+  --color-brand-500: #a63a54;
+  --color-brand-600: #862a40;
+  --color-brand-700: #6f1f2f;
+  --color-brand-800: #561724;
+  --color-brand-900: #3e1019;
+
+  /* Neutrales. */
+  --color-background: #f4f3ef;
+  --color-foreground: #1a1a1a;
+  --color-muted: #8b8d8f;
+  --color-muted-foreground: #6b7280;
+  --color-border: #e9e7e3;
+  --color-card: #ffffff;
+  --color-card-foreground: #1a1a1a;
+
+  /* Tipos de movimiento (íconos y chips del Figma). */
+  --color-sus: #9c5bd9;
+  --color-sus-bg: #f3e4fb;
+  --color-cash-in: #e23a4a;
+  --color-cash-in-bg: #fee0e3;
+  --color-cash-out: #ee8934;
+  --color-cash-out-bg: #fdedd5;
+
+  /* Fuente principal cargada vía next/font. */
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+
+  /* Radio por defecto de los cards del diseño. */
+  --radius-card: 1rem;
+}
+
+/* Utilidades base. */
+html,
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
