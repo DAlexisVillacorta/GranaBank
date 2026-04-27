@@ -15,8 +15,8 @@ const VARIANTS: Record<Variant, string> = {
   primary:
     "bg-brand-700 text-white hover:bg-brand-800 active:bg-brand-900 disabled:bg-brand-400",
   secondary:
-    "bg-white text-brand-700 border border-brand-200 hover:bg-brand-50",
-  ghost: "bg-transparent text-brand-700 hover:bg-brand-50",
+    "bg-card text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800 hover:bg-brand-50 dark:hover:bg-brand-900",
+  ghost: "bg-transparent text-brand-700 dark:text-brand-300 hover:bg-brand-50 dark:hover:bg-brand-900",
 };
 
 const SIZES: Record<Size, string> = {
@@ -35,7 +35,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       disabled={disabled || loading}
       className={cn(
         "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-colors",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         "disabled:cursor-not-allowed",
         VARIANTS[variant],
         SIZES[size],

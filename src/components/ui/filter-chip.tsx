@@ -21,7 +21,7 @@ export function FilterChip({
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2",
         active
           ? "bg-brand-700 text-white"
-          : "bg-card text-muted-foreground hover:bg-brand-50 hover:text-brand-700",
+          : "bg-card text-muted-foreground hover:bg-brand-50 dark:hover:bg-brand-900 hover:text-brand-700 dark:hover:text-brand-300",
         className,
       )}
       {...props}

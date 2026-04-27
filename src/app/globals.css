@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Dark mode activado por clase `.dark` en <html>. */
+@custom-variant dark (&:is(.dark *));
+
 /*
  * Design tokens extraídos del Figma.
  * En Tailwind v4 la paleta se define con @theme y los tokens quedan
@@ -40,6 +43,34 @@
 
   /* Radio por defecto de los cards del diseño. */
   --radius-card: 1rem;
+
+  /* Animación de entrada para listas. */
+  --animate-fade-up: fade-up 0.3s ease-out both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Overrides de tokens en modo oscuro. */
+.dark {
+  --color-background: #111113;
+  --color-foreground: #f0eee9;
+  --color-muted: #9ca3af;
+  --color-muted-foreground: #9ca3af;
+  --color-border: #27272a;
+  --color-card: #1c1c1f;
+  --color-card-foreground: #f0eee9;
+  --color-sus-bg: #2d1a42;
+  --color-cash-in-bg: #3d1117;
+  --color-cash-out-bg: #3d2210;
 }
 
 /* Utilidades base. */

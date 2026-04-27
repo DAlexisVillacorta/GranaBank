@@ -1,10 +1,14 @@
 import { Suspense } from "react";
 
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { LoginForm } from "./login-form";
 
 export default function LoginPage() {
   return (
     <main className="mx-auto flex min-h-dvh max-w-lg flex-col justify-between bg-background px-6 py-8">
+      <div className="flex justify-end">
+        <ThemeToggle />
+      </div>
       <header className="flex flex-col items-center gap-3 pt-8">
         <div
           aria-hidden

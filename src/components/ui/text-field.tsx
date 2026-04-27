@@ -35,7 +35,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           aria-invalid={error ? true : undefined}
           aria-describedby={descriptorId}
           className={cn(
-            "h-12 w-full rounded-xl border bg-white px-4 text-base outline-none transition-colors",
+            "h-12 w-full rounded-xl border bg-card px-4 text-base text-foreground outline-none transition-colors",
             "placeholder:text-muted",
             "focus:border-brand-500 focus:ring-2 focus:ring-brand-200",
             error

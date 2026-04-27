@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { cn } from "@/lib/cn";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 type NavItem = {
   href: string;
@@ -57,7 +58,7 @@ export function BottomNav() {
                 className={cn(
                   "flex size-11 items-center justify-center rounded-xl transition-colors",
                   active
-                    ? "bg-brand-50 text-brand-700"
+                    ? "bg-brand-50 dark:bg-brand-900 text-brand-700 dark:text-brand-300"
                     : "text-muted hover:text-foreground",
                 )}
               >
@@ -66,6 +67,9 @@ export function BottomNav() {
             </li>
           );
         })}
+        <li>
+          <ThemeToggle />
+        </li>
         <li>
           <button
             type="button"

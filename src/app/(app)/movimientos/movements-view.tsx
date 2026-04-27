@@ -130,8 +130,12 @@ export function MovementsView() {
         />
       ) : (
         <ul className="flex flex-col gap-2">
-          {data?.map((m) => (
-            <li key={m.id}>
+          {data?.map((m, i) => (
+            <li
+              key={m.id}
+              className="animate-fade-up"
+              style={{ animationDelay: `${i * 50}ms` }}
+            >
               <MovementItem movement={m} href={`/movimientos/${m.id}`} />
             </li>
           ))}

@@ -38,14 +38,14 @@ export default async function HomePage() {
           <Link
             href="/movimientos"
             aria-label="Ir a movimientos"
-            className="flex size-10 items-center justify-center rounded-full text-foreground hover:bg-brand-50"
+            className="flex size-10 items-center justify-center rounded-full text-foreground hover:bg-brand-50 dark:hover:bg-brand-900"
           >
             <Search className="size-5" strokeWidth={2} />
           </Link>
           <button
             type="button"
             aria-label="Notificaciones"
-            className="flex size-10 items-center justify-center rounded-full text-foreground hover:bg-brand-50"
+            className="flex size-10 items-center justify-center rounded-full text-foreground hover:bg-brand-50 dark:hover:bg-brand-900"
           >
             <Bell className="size-5" strokeWidth={2} />
           </button>
@@ -64,8 +64,12 @@ export default async function HomePage() {
           </p>
         ) : (
           <ul className="flex flex-col gap-2">
-            {latestMovements.map((m) => (
-              <li key={m.id}>
+            {latestMovements.map((m, i) => (
+              <li
+                key={m.id}
+                className="animate-fade-up"
+                style={{ animationDelay: `${i * 60}ms` }}
+              >
                 <MovementItem movement={m} href={`/movimientos/${m.id}`} />
               </li>
             ))}
